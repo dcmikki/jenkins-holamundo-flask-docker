@@ -4,7 +4,9 @@ pipeline {
         stage('Creando Virtual Enviroment') {
             steps {
                 sh 'virtualenv entorno_virtual'
-                sh 'bash -c source entorno_virtual/bin/activate'
+                sh '''
+                      bash -c "source entorno_virtual/bin/activate"
+                '''
             }
         }
         stage('Installando Requirements') {

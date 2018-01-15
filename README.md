@@ -1,4 +1,4 @@
-# jenkins-holamundo
+# Crear aplicacion en python con FLASK y desplegar con Docker en Dockerhub
 Divido este projecto en dos para probarla sintaxis de los fichero Jenkinsfile en formato groovy.
 
 PROJECTO II

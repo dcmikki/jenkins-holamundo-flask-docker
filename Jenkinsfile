@@ -5,13 +5,15 @@ pipeline {
             steps {
                 sh 'virtualenv entorno_virtual'
                 sh '''
-                      bash -c "source entorno_virtual/bin/activate"
+                        bash -c "source entorno_virtual/bin/activate"
                 '''
             }
         }
         stage('Installando Requirements') {
             steps {
-                sh 'bash -c /usr/local/bin/pip install -r requirements.txt'
+                sh '''
+                        bash -c "/usr/local/bin/pip install -r requirements.txt"
+                '''
             }
         }
         stage('Run Flask Application') {

@@ -1,48 +1,40 @@
-// Este es el primer primer borrador del Jenkinsfile. Se tiene que mirar todo la sintaxis
-// Ver como poner coretament los comandos bash, multi-linea, variables, path, etc
-// Lo mejor es trocear el pipeline e ir testeando cada 'stage' en cadena
 pipeline {
-    agent master
+    agent any
     stages {
-        stage('Hola Mundo') {
+        stage('Creando Virtual Enviroment') {
             steps {
-                sh 'echo HOLA MUNDO'
-            }
-        }
-        stage('Ansible Module') {
-            steps {
-                sh 'bash -c ./scripts/hola_ansible.sh'
-            }
-        }
-        stage('Entorno virtual') {
-            steps {
+                sh 'virtualenv entorno_virtual'
                 sh 'bash -c source entorno_virtual/bin/activate'
             }
         }
-        stage('Requirements') {
+        stage('Installando Requirements') {
             steps {
                 sh 'bash -c /usr/local/bin/pip install -r requirements.txt'
             }
         }
-        stage('Flask App') {
+        stage('Run Flask Application') {
             steps {
                 sh 'bash -c /usr/bin/python src/main.py &'
             }
         }
-        stage('Testing') {
+        stage('Test Application') {
             steps {
                 sh 'bash -c cd src && pytest && cd .. '
             }
         }
-        stage('Docker IMAGE') {
+        stage('Build Docker Image') {
             steps {
                 sh 'bash -c docker build -t apptest:latest . '
             }
         }
-        stage('Docker PUSH') {
+        stage('Push to DockerHub') {
             steps {
                 sh 'bash -c docker tag apptest:latest dcmikki/apptest:latest'
                 sh 'bash -c docker push dcmikki/apptest:latest '
+            }
+        }
+        stage('Delete local images') {
+            steps {
                 sh 'bash -c docker rmi apptest:latest && docker rmi dcmikki/apptest:latest && docker rmi ubuntu:latest '
             }
         }

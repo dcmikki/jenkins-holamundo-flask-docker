@@ -2,7 +2,7 @@
 FROM ubuntu:latest
 
 RUN 	apt-get update && apt-get -y upgrade
-RUN 	apt-get install -y python python-pip htop tree telnet nmap
+RUN 	apt-get install -y python python-pip htop tree telnet 
 RUN 	mkdir -p /opt/app
 
 COPY 	src/* /opt/app/

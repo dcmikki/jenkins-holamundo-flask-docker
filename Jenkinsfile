@@ -50,7 +50,6 @@ pipeline {
                 sh '''
                         docker rmi apptest:latest
                         docker rmi dcmikki/apptest:latest
-                        docker rmi ubuntu:latest 
                 '''
             }
         }

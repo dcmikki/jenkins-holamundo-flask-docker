@@ -18,12 +18,16 @@ pipeline {
         }
         stage('Run Flask Application') {
             steps {
-                sh 'bash -c /usr/bin/python src/main.py &'
+                sh '''
+                        bash -c "/usr/bin/python src/main.py &"
+                '''
             }
         }
         stage('Test Application') {
             steps {
-                sh 'bash -c cd src && pytest && cd .. '
+                sh '''
+                        bash -c "cd src && pytest && cd .. "
+                '''
             }
         }
         stage('Build Docker Image') {

@@ -32,18 +32,26 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'bash -c docker build -t apptest:latest . '
+                sh '''
+                        bash -c "docker build -t apptest:latest ."
+                '''
             }
         }
         stage('Push to DockerHub') {
             steps {
-                sh 'bash -c docker tag apptest:latest dcmikki/apptest:latest'
-                sh 'bash -c docker push dcmikki/apptest:latest '
+                sh '''
+                        bash -c "docker tag apptest:latest dcmikki/apptest:latest"
+                '''
+                sh '''
+                        bash -c "docker push dcmikki/apptest:latest" 
+                '''
             }
         }
         stage('Delete local images') {
             steps {
-                sh 'bash -c docker rmi apptest:latest && docker rmi dcmikki/apptest:latest && docker rmi ubuntu:latest '
+                sh '''
+                        bash -c "docker rmi apptest:latest && docker rmi dcmikki/apptest:latest && docker rmi ubuntu:latest "
+                '''
             }
         }
     }

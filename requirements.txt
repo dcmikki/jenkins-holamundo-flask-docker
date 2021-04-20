@@ -9,7 +9,7 @@ Jinja2>=2.10.1
 MarkupSafe==1.0
 networkx==2.0
 pluggy==0.6.0
-py==1.5.2
+py==1.10.0
 pytest==3.3.2
 six==1.11.0
 werkzeug>=0.15.3
